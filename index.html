@@ -1,1 +1,123 @@
-Hello SoftCharacter 
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SoftCharacter 的 GitHub 项目作品集，展示 2025 年以来的公开项目。">
+  <title>SoftCharacter · GitHub portfolio</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+</head>
+<body>
+  <!-- 顶部导航只保留身份、时间范围和主题切换，避免抢占项目内容。 -->
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="回到作品集顶部">
+      <span class="brand-mark" aria-hidden="true">SC</span>
+      <span class="brand-name">SoftCharacter</span>
+    </a>
+    <nav class="site-nav" aria-label="页面导航">
+      <a href="#work">项目</a>
+      <a href="#about">关于</a>
+      <a class="nav-github" href="https://github.com/SoftCharacter" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换深浅色主题" aria-pressed="false">浅色</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- Hero 只陈述身份和数据来源，不虚构个人简介。 -->
+    <section class="hero section-shell" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> GitHub portfolio / 2025—现在</p>
+        <h1 id="hero-title">把想法，<em>做成可以运行的东西。</em></h1>
+        <p class="hero-lede">这是 SoftCharacter 的开源工作档案。页面实时读取 GitHub 公开仓库，按 2025 年 1 月 1 日之后的活动整理。</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#work">查看项目 <span aria-hidden="true">↓</span></a>
+          <a class="button button-quiet" href="https://github.com/SoftCharacter" target="_blank" rel="noreferrer">打开 GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <aside class="identity-panel" aria-label="GitHub 账号信息">
+        <div class="avatar-wrap">
+          <img id="profile-avatar" src="https://github.com/SoftCharacter.png?size=240" alt="SoftCharacter 的 GitHub 头像">
+          <span class="avatar-fallback" id="avatar-fallback" aria-hidden="true">SC</span>
+        </div>
+        <div class="identity-meta">
+          <span class="mono-label">ACCOUNT</span>
+          <strong id="profile-login">SoftCharacter</strong>
+          <span id="profile-bio">正在从 GitHub 读取公开资料…</span>
+        </div>
+        <div class="identity-stats">
+          <div><span class="stat-value" id="profile-repos">—</span><span class="stat-label">公开仓库</span></div>
+          <div><span class="stat-value" id="profile-followers">—</span><span class="stat-label">关注者</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- 统计条把作品集的范围固定为真实 API 返回值。 -->
+    <section class="signal-bar section-shell" aria-label="项目概览">
+      <div><span class="signal-number" id="project-count">—</span><span class="signal-label">个 2025+ 项目</span></div>
+      <div><span class="signal-number" id="language-count">—</span><span class="signal-label">种主要语言</span></div>
+      <div><span class="signal-number" id="star-count">—</span><span class="signal-label">颗 GitHub stars</span></div>
+      <p class="signal-note">数据来源 <a href="https://docs.github.com/en/rest" target="_blank" rel="noreferrer">GitHub REST API</a><br><span id="last-sync">等待同步</span></p>
+    </section>
+
+    <section id="work" class="work section-shell" aria-labelledby="work-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Selected work / 01</p>
+          <h2 id="work-title">项目档案</h2>
+        </div>
+        <p class="section-intro">按最近活动整理。每一张卡片都直达真实仓库，适合继续阅读代码、文档和提交记录。</p>
+      </div>
+
+      <!-- 筛选控件采用原生控件，键盘和移动端更稳。 -->
+      <div class="toolbar" aria-label="项目筛选工具">
+        <label class="search-field">
+          <span class="sr-only">搜索项目</span>
+          <span aria-hidden="true">⌕</span>
+          <input id="project-search" type="search" placeholder="搜索仓库名或描述" autocomplete="off">
+        </label>
+        <label class="select-field">
+          <span class="sr-only">按语言筛选</span>
+          <select id="language-filter"><option value="all">全部语言</option></select>
+        </label>
+        <label class="select-field">
+          <span class="sr-only">项目排序方式</span>
+          <select id="sort-select">
+            <option value="recent">最近更新</option>
+            <option value="stars">Stars 优先</option>
+            <option value="name">名称 A—Z</option>
+          </select>
+        </label>
+      </div>
+
+      <div id="project-status" class="project-status" role="status" aria-live="polite">
+        <span class="status-spinner" aria-hidden="true"></span> 正在加载 GitHub 项目…
+      </div>
+      <div id="project-grid" class="project-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="about" class="about section-shell" aria-labelledby="about-title">
+      <div class="about-index">02</div>
+      <div>
+        <p class="eyebrow">About the archive</p>
+        <h2 id="about-title">一个会自己更新的作品集。</h2>
+        <p>这里没有静态的项目截图，也没有脱离上下文的漂亮口号。作品集直接连接 SoftCharacter 的公开 GitHub 活动：项目有新提交，它就会跟着更新；项目被归档，页面也会诚实地标出来。</p>
+      </div>
+      <dl class="about-notes">
+        <div><dt>范围</dt><dd>2025.01.01 至今</dd></div>
+        <div><dt>来源</dt><dd>GitHub public repositories</dd></div>
+        <div><dt>入口</dt><dd><a href="https://github.com/SoftCharacter" target="_blank" rel="noreferrer">github.com/SoftCharacter ↗</a></dd></div>
+      </dl>
+    </section>
+  </main>
+
+  <footer class="site-footer section-shell">
+    <span>SoftCharacter / open work archive</span>
+    <span id="footer-year">2026</span>
+  </footer>
+
+  <!-- JS 只负责数据和交互，视觉规则集中在 styles/ 模块中。 -->
+  <script src="portfolio.js" defer></script>
+</body>
+</html>
